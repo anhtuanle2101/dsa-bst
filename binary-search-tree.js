@@ -132,21 +132,42 @@ class BinarySearchTree {
    * Return an array of visited nodes. */
 
   dfsPreOrder() {
-    
+    const array = [];
+    function recursionHelper(currentNode){
+      array.push(currentNode);
+      if (currentNode.left) recursionHelper(currentNode.left);
+      if (currentNode.right) recursionHelper(currentNode.right);
+    }
+    recursionHelper(this.root);
+    return array;
   }
 
   /** dfsInOrder(): Traverse the array using in-order DFS.
    * Return an array of visited nodes. */
 
   dfsInOrder() {
-
+    const array = [];
+    function recursionHelper(currentNode){
+      if (currentNode.left) recursionHelper(currentNode.left);
+      array.push(currentNode);
+      if (currentNode.right) recursionHelper(currentNode.right);
+    }
+    recursionHelper(this.root);
+    return array;
   }
 
   /** dfsPostOrder(): Traverse the array using post-order DFS.
    * Return an array of visited nodes. */
 
   dfsPostOrder() {
-
+    const array = [];
+    function recursionHelper(currentNode){
+      if (currentNode.left) recursionHelper(currentNode.left);
+      if (currentNode.right) recursionHelper(currentNode.right);
+      array.push(currentNode);
+    }
+    recursionHelper(this.root);
+    return array;
   }
 
   /** bfs(): Traverse the array using BFS.
