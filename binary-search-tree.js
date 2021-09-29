@@ -21,7 +21,7 @@ class BinarySearchTree {
       this.root = newNode;
       return this.root;
     }
-    while (!currentNode){
+    while (currentNode){
       if (val < currentNode.val){
         if (!currentNode.left){
           currentNode.left = newNode;
@@ -73,21 +73,66 @@ class BinarySearchTree {
    * return the node, if found; else undefined. Uses iteration. */
 
   find(val) {
+    let currentNode = this.root;
+    if (!this.root){
+      return undefined;
+    }
 
+    while (currentNode){
+      if (currentNode.val === val) return currentNode;
+      if (val < currentNode.val){
+        if (currentNode.left){
+          currentNode = currentNode.left;
+        }else{
+          return undefined;
+        }
+      }else if (val > currentNode.val){
+        if (currentNode.right){
+          currentNode = currentNode.right;
+        }else{
+          return undefined;
+        }
+      }
+    }
   }
 
   /** findRecursively(val): search the tree for a node with value val.
    * return the node, if found; else undefined. Uses recursion. */
 
   findRecursively(val) {
-
+    if (!this.root){
+      return undefined;
+    }
+    function recursionHelper(currentNode){
+      if (!currentNode){
+        return undefined;
+      }
+      if (val === currentNode.val){
+        return currentNode;
+      }
+      if (val < currentNode.val){
+        if (currentNode.left){
+          recursionHelper(currentNode.left);
+        }else{
+          return undefined;
+        }
+      }
+      if (val > currentNode.val){
+        if (currentNode.right){
+          recursionHelper(currentNode.right);
+        }else{
+          return undefined;
+        }
+      }
+    }
+    return recursionHelper(this.root);
   }
 
   /** dfsPreOrder(): Traverse the array using pre-order DFS.
    * Return an array of visited nodes. */
 
   dfsPreOrder() {
-
+    
   }
 
   /** dfsInOrder(): Traverse the array using in-order DFS.
