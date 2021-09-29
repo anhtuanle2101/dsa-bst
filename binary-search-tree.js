@@ -15,14 +15,58 @@ class BinarySearchTree {
    * Returns the tree. Uses iteration. */
 
   insert(val) {
-
+    const currentNode = this.root;
+    const newNode = new Node(val);
+    if (!currentNode){
+      this.root = newNode;
+      return this.root;
+    }
+    while (!currentNode){
+      if (val < currentNode.val){
+        if (!currentNode.left){
+          currentNode.left = newNode;
+          return this.root;
+        }else{
+          currentNode = currentNode.left;
+        }
+      }else{
+        if (!currentNode.right){
+          currentNode.right = newNode;
+          return this.root;
+        }else{
+          currentNode = currentNode.right;
+        }
+      }
+    }
   }
 
   /** insertRecursively(val): insert a new node into the BST with value val.
    * Returns the tree. Uses recursion. */
 
   insertRecursively(val) {
-
+    const newNode = new Node(val);
+    function recursionHelper(currentNode){
+      if (!currentNode){
+        return;
+      }
+      if (currentNode.val < val){
+        if (!currentNode.left){
+          currentNode.left = newNode;
+          return;
+        }else{
+          recursionHelper(currentNode.left);
+        }
+      }else{
+        if (!currentNode.right){
+          currentNode.right = newNode;
+          return;
+        }else{
+          recursionHelper(currentNode.right);
+        }
+      }
+    }
+    recursionHelper(this.root);
+    return this.root;
   }
 
   /** find(val): search the tree for a node with value val.
